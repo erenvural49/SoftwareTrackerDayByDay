@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = "https://overinsistent-anachronically-justa.ngrok-free.dev/api";
+const API_BASE_URL = "http://localhost:5277/api";
 
 // State Management
 let currentUser = null;
