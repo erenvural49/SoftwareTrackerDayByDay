@@ -53,7 +53,16 @@ builder.Services.AddCors(options =>
               .AllowCredentials();
     });
 });
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyOrigin() // Tüm adreslere izin ver (Geliştirme aşamasında en kolayı)
+                  .AllowAnyMethod() // GET, POST, PUT vb. her şeye izin ver
+                  .AllowAnyHeader(); // Tüm başlıklara (Content-Type vb.) izin ver
+        });
+});
 var app = builder.Build();
 
 // Create database and apply migrations
@@ -70,7 +79,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowFrontend");
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
