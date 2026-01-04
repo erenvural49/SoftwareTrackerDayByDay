@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yazılım Öğrenme Günlüğü</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Auth Pages -->
+    <div id="auth-page" class="page active">
+        <div class="auth-container">
+            <h1 class="main-title">Yazılım Öğrenme Günlüğü</h1>
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="login">Giriş Yap</button>
+                <button class="tab-btn" data-tab="register">Kayıt Ol</button>
+            </div>
+            
+            <div id="login-form" class="auth-form active">
+                <h2>Giriş Yap</h2>
+                <form id="loginForm">
+                    <input type="text" id="login-firstname" placeholder="Ad" required>
+                    <input type="text" id="login-lastname" placeholder="Soyad" required>
+                    <button type="submit">Giriş Yap</button>
+                </form>
+            </div>
+            
+            <div id="register-form" class="auth-form">
+                <h2>Kayıt Ol</h2>
+                <form id="registerForm">
+                    <input type="text" id="register-firstname" placeholder="Ad" required>
+                    <input type="text" id="register-lastname" placeholder="Soyad" required>
+                    <button type="submit">Kayıt Ol</button>
+                </form>
+            </div>
+            
+            <div id="auth-message" class="message"></div>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page">
+        <nav class="navbar">
+            <h1 class="main-title">Yazılım Öğrenme Günlüğü</h1>
+            <div class="nav-user">
+                <span id="user-name"></span>
+                <button id="logout-btn" class="btn-secondary">Çıkış</button>
+            </div>
+        </nav>
+
+        <div class="container">
+            <!-- Navigation Tabs -->
+            <div class="dashboard-tabs">
+                <button class="dash-tab-btn active" data-tab="progress">İlerleme</button>
+                <button class="dash-tab-btn" data-tab="daily-form" id="daily-form-tab">Günlük Form</button>
+                <button class="dash-tab-btn" data-tab="reports" id="reports-tab">Raporlar</button>
+                <button class="dash-tab-btn" data-tab="qa">Soru-Cevap</button>
+            </div>
+
+            <!-- Progress Tab -->
+            <div id="progress-tab" class="tab-content active">
+                <h2>İlerleme Takibi</h2>
+                
+                <!-- Notifications -->
+                <div id="notifications-container" class="notifications"></div>
+                
+                <!-- Weekly Cards -->
+                <div id="weekly-cards-container" class="weekly-cards"></div>
+                
+                <!-- Contribution Graph -->
+                <div class="contribution-section">
+                    <h3>26 Ocak - 16 Şubat 2026 Çalışma Takibi</h3>
+                    <div id="contribution-graph" class="contribution-graph"></div>
+                    <div class="contribution-legend">
+                        <span>Az</span>
+                        <div class="legend-item" style="background-color: #ebedf0;"></div>
+                        <div class="legend-item" style="background-color: #39d353;"></div>
+                        <div class="legend-item" style="background-color: #26a641;"></div>
+                        <div class="legend-item" style="background-color: #006d32;"></div>
+                        <div class="legend-item" style="background-color: #0e4429;"></div>
+                        <span>Çok</span>
+                    </div>
+                </div>
+                
+                <!-- Mentor View: All Participants -->
+                <div id="mentor-participants-section" style="display: none;">
+                    <h3>Tüm Katılımcılar</h3>
+                    <div id="participants-list" class="participants-list"></div>
+                </div>
+            </div>
+
+            <!-- Daily Form Tab -->
+            <div id="daily-form-tab-content" class="tab-content">
+                <h2>Günlük Gelişim Formu</h2>
+                <form id="daily-report-form" class="daily-form">
+                    <div class="form-group">
+                        <label>1. Bugün ne öğrendim?</label>
+                        <textarea id="what-learned" rows="3" placeholder="Örn: C# For döngüsü" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>2. En çok nerede zorlandım?</label>
+                        <textarea id="where-struggled" rows="3" placeholder="Örn: Süslü parantezlerin yerini karıştırmak" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>3. Çözdüğüm hata (varsa):</label>
+                        <textarea id="errors-solved" rows="3" placeholder="Örn: Noktalı virgül hatası" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>4. Yarınki hedefim ne?</label>
+                        <textarea id="tomorrow-goal" rows="3" placeholder="Örn: While döngüsüne bakmak" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>5. Bugünkü yazılımda ilerlemek için gösterdiğin çaban sence nasıldı?</label>
+                        <div class="effort-options">
+                            <label class="effort-option">
+                                <input type="radio" name="effort" value="Güzel" required>
+                                <span class="effort-icon">🟢</span>
+                                <span>Güzel</span>
+                            </label>
+                            <label class="effort-option">
+                                <input type="radio" name="effort" value="Orta" required>
+                                <span class="effort-icon">🟡</span>
+                                <span>Orta</span>
+                            </label>
+                            <label class="effort-option">
+                                <input type="radio" name="effort" value="Kötü" required>
+                                <span class="effort-icon">🔴</span>
+                                <span>Kötü</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Form Kaydet</button>
+                </form>
+                <div id="form-message" class="message"></div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div id="reports-tab-content" class="tab-content">
+                <h2>Günlük Raporlar</h2>
+                <div id="reports-container" class="reports-container"></div>
+            </div>
+
+            <!-- Q&A Tab -->
+            <div id="qa-tab-content" class="tab-content">
+                <h2>Soru-Cevap Bölümü</h2>
+                <div class="qa-section">
+                    <div id="questions-container" class="questions-container"></div>
+                    <form id="question-form" class="question-form">
+                        <textarea id="question-input" placeholder="Sorunuzu buraya yazın..." rows="3" required></textarea>
+                        <button type="submit" class="btn-primary">Soru Sor</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
